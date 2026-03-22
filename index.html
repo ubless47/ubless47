@@ -1190,21 +1190,14 @@
 
       <!-- 왼쪽: 생활소음 집계표 -->
       <div style="display:flex;flex-direction:column;">
-        <div class="section-header" style="flex-wrap:nowrap;gap:6px;">
+        <div class="section-header" style="flex-wrap:nowrap;gap:6px;margin-bottom:12px;">
           <div class="section-title" style="flex-shrink:0;"><div class="dot"></div><h2>생활소음 집계표</h2></div>
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow:hidden;">
-            <span style="display:flex;align-items:center;gap:3px;font-size:10px;color:var(--text-muted);flex-shrink:0;">
-              <span style="width:8px;height:8px;border-radius:50%;background:#fef08a;border:1px solid #facc15;display:inline-block;"></span>주의
-              <span style="width:8px;height:8px;border-radius:50%;background:#fdba74;border:1px solid #f97316;display:inline-block;margin-left:2px;"></span>위험
-              <span style="width:8px;height:8px;border-radius:50%;background:#f87171;border:1px solid #dc2626;display:inline-block;margin-left:2px;"></span>다수
-              <span style="width:8px;height:8px;border-radius:50%;background:#edf2f7;border:1px solid #cbd5e0;display:inline-block;margin-left:2px;"></span>없음
-            </span>
-            <div style="display:flex;align-items:center;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0;">
-              <button onclick="changeHeatmapMonth(-1)" style="background:var(--surface);border:none;padding:4px 8px;cursor:pointer;font-size:13px;color:var(--text-muted);">‹</button>
-              <div id="heatmap-month-label" style="padding:4px 8px;font-size:11px;font-weight:700;color:var(--primary-dark);background:white;min-width:64px;text-align:center;border-left:1px solid var(--border);border-right:1px solid var(--border);"></div>
-              <button onclick="changeHeatmapMonth(1)" id="heatmap-next-btn" style="background:var(--surface);border:none;padding:4px 8px;cursor:pointer;font-size:13px;color:var(--text-muted);">›</button>
+          <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:auto;">
+            <div style="display:flex;align-items:center;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+              <button onclick="changeHeatmapMonth(-1)" style="background:var(--surface);border:none;padding:4px 10px;cursor:pointer;font-size:14px;color:var(--text-muted);">‹</button>
+              <div id="heatmap-month-label" style="padding:4px 10px;font-size:12px;font-weight:700;color:var(--primary-dark);background:white;min-width:68px;text-align:center;border-left:1px solid var(--border);border-right:1px solid var(--border);"></div>
+              <button onclick="changeHeatmapMonth(1)" id="heatmap-next-btn" style="background:var(--surface);border:none;padding:4px 10px;cursor:pointer;font-size:14px;color:var(--text-muted);">›</button>
             </div>
-            <button class="btn btn-outline btn-sm" style="flex-shrink:0;font-size:11px;padding:4px 8px;" onclick="showPage('notice')">전체보기</button>
             <button id="admin-noise-download-btn" class="btn btn-primary btn-sm" style="display:none;flex-shrink:0;font-size:11px;padding:4px 8px;" onclick="downloadNoiseReport()">📥 다운로드</button>
           </div>
         </div>
@@ -1214,6 +1207,21 @@
             <div style="background:linear-gradient(160deg,#1a1005,#2e1f08 60%,#100b03);border-radius:12px;padding:10px;overflow-x:auto;">
               <canvas id="noise-canvas-home" style="display:block;width:100%;cursor:pointer;border-radius:6px;"></canvas>
               <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:6px;text-align:center;">※ 층을 클릭하면 해당 민원을 확인할 수 있습니다</p>
+            </div>
+            <!-- 범례 (캔버스 아래) -->
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px;padding:7px 12px;background:var(--surface);border-radius:8px;border:1px solid var(--border);">
+              <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-muted);">
+                <span style="width:10px;height:10px;border-radius:50%;background:#fef08a;border:1px solid #facc15;display:inline-block;flex-shrink:0;"></span>주의
+              </span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-muted);">
+                <span style="width:10px;height:10px;border-radius:50%;background:#fdba74;border:1px solid #f97316;display:inline-block;flex-shrink:0;"></span>위험
+              </span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-muted);">
+                <span style="width:10px;height:10px;border-radius:50%;background:#f87171;border:1px solid #dc2626;display:inline-block;flex-shrink:0;"></span>다수
+              </span>
+              <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-muted);">
+                <span style="width:10px;height:10px;border-radius:50%;background:#edf2f7;border:1px solid #cbd5e0;display:inline-block;flex-shrink:0;"></span>없음
+              </span>
             </div>
             <!-- 통계 4컬럼: TOP1~5 / TOP6~10 / 소음유형별 / 동별접수 -->
             <div style="margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;border-top:1px solid var(--border);padding-top:16px;">
@@ -1424,14 +1432,19 @@
             </div>
           </div>
 
-          <!-- 연락처 — 동/호수 아래, 비밀번호 역할 안내 -->
+          <!-- 연락처 뒷 4자리 -->
           <div class="form-group form-full" id="fg-phone">
-            <label class="form-label" id="lb-phone">연락처 <span class="required">*</span></label>
+            <label class="form-label" id="lb-phone">연락처 뒷 4자리 <span class="required">*</span></label>
             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <input class="form-input" id="f-phone" type="tel" placeholder="010-0000-0000" style="max-width:280px;">
+              <div style="display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:8px 14px;">
+                <span style="font-size:13px;color:var(--text-muted);font-weight:500;white-space:nowrap;">010 - **** -</span>
+                <input class="form-input" id="f-phone" type="tel" maxlength="4" placeholder="1234"
+                  style="width:80px;text-align:center;font-size:16px;font-weight:700;letter-spacing:4px;border:none;background:transparent;padding:0;box-shadow:none;"
+                  oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)">
+              </div>
               <div style="display:flex;align-items:center;gap:6px;background:#fef7e8;border:1px solid #ddd0b8;border-radius:8px;padding:7px 12px;">
                 <span style="font-size:15px;">🔑</span>
-                <span style="font-size:12px;color:#6b4c1e;font-weight:500;">연락처 뒷 4자리가 <strong>민원 조회 비밀번호</strong>로 사용됩니다</span>
+                <span style="font-size:12px;color:#6b4c1e;font-weight:500;">입력한 4자리가 <strong>민원 조회 비밀번호</strong>로 사용됩니다</span>
               </div>
             </div>
           </div>
@@ -1857,9 +1870,24 @@
         <label class="form-label">이름 <span class="required">*</span></label>
         <input class="form-input" id="sc-name" type="text" placeholder="예: 관리사무소">
       </div>
-      <div class="form-group" style="margin-bottom:14px;">
+      <!-- 전화번호 / URL 선택 -->
+      <div class="form-group" style="margin-bottom:8px;">
+        <label class="form-label">연결 방식 <span class="required">*</span></label>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <button type="button" id="sc-type-phone" onclick="switchScType('phone')"
+            style="flex:1;padding:8px;border-radius:8px;border:2px solid #8a6a2a;background:#fef7e8;font-size:12px;font-weight:600;color:#6b4c1e;cursor:pointer;">📞 전화번호</button>
+          <button type="button" id="sc-type-url" onclick="switchScType('url')"
+            style="flex:1;padding:8px;border-radius:8px;border:2px solid transparent;background:var(--surface);font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;">🔗 URL 링크</button>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px;" id="sc-tel-group">
         <label class="form-label">전화번호 <span class="required">*</span></label>
         <input class="form-input" id="sc-tel" type="tel" placeholder="예: 031-000-0000">
+      </div>
+      <div class="form-group" style="margin-bottom:14px;display:none;" id="sc-url-group">
+        <label class="form-label">URL 주소 <span class="required">*</span></label>
+        <input class="form-input" id="sc-url" type="url" placeholder="예: https://cafe.naver.com/ubless47">
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">※ 입주민이 누르면 해당 링크로 바로 이동합니다</div>
       </div>
       <div class="form-group" style="margin-bottom:14px;">
         <label class="form-label">아이콘</label>
@@ -1948,30 +1976,25 @@
 <!-- Toast -->
 <div class="toast" id="toast"><span id="toast-msg"></span></div>
 
-<!-- Google Apps Script 데이터 저장 -->
+<!-- Google Apps Script 데이터 저장 (POST 방식) -->
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbyDZNdbX1VEx9JBn3ir0HhmKiRdWRSBp5vJ-6BCIn3kIqNb9_JphK9SYsA3W7T7avRPNw/exec';
 
 async function saveToStorage() {
   try {
-    const raw = JSON.stringify({
+    const body = JSON.stringify({
       complaints, notices, noticeComments, shortcuts,
       complaintCounter, noticeCounter, commentCounter
     });
-    
-    // POST 방식 및 안전장치(헤더) 추가
-    const res = await fetch(GAS_URL, { 
+    await fetch(GAS_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8',
-      },
-      body: raw
+      headers: { 'Content-Type': 'text/plain' },
+      body: body
     });
-    
-    const text = await res.text();
-    console.log('✅ 저장 완료:', text);
+    console.log('✅ 저장 완료');
   } catch(e) { console.warn('저장 오류:', e); }
 }
+
 async function loadFromStorage() {
   try {
     const res = await fetch(GAS_URL + '?t=' + Date.now());
@@ -2021,7 +2044,7 @@ const DEFAULT_SHORTCUTS = [
 ];
 
 // ═══════════════════════════════
-//  DATA STORE (기본값으로 시작, Firestore에서 비동기 로드)
+//  DATA STORE (기본값으로 시작, Google Sheets에서 비동기 로드)
 // ═══════════════════════════════
 let complaints       = DEFAULT_COMPLAINTS.map(c=>({...c}));
 let notices          = DEFAULT_NOTICES.map(n=>({...n}));
@@ -2084,17 +2107,17 @@ function setCategory(cat) {
   if (cat === 'noise') {
     noiseFields.forEach(id => document.getElementById(id).style.display = '');
     document.getElementById('fg-unit').style.display = 'none';
-    document.getElementById('lb-phone').innerHTML = '연락처 <span class="required">*</span>';
+    document.getElementById('lb-phone').innerHTML = '연락처 뒷 4자리 <span class="required">*</span>';
     document.getElementById('form-title').textContent = '🔊 생활소음 신고';
   } else if (cat === 'parking') {
     parkingFields.forEach(id => document.getElementById(id).style.display = '');
     document.getElementById('fg-unit').style.display = '';
-    document.getElementById('lb-phone').innerHTML = '연락처 <span class="required">*</span>';
+    document.getElementById('lb-phone').innerHTML = '연락처 뒷 4자리 <span class="required">*</span>';
     document.getElementById('form-title').textContent = '🚗 불법주차 신고';
   } else {
     genField.style.display = '';
     document.getElementById('fg-unit').style.display = '';
-    document.getElementById('lb-phone').innerHTML = '연락처 <span class="required">*</span>';
+    document.getElementById('lb-phone').innerHTML = '연락처 뒷 4자리 <span class="required">*</span>';
     document.getElementById('form-title').textContent = '📋 일반 민원 접수';
   }
 }
@@ -2216,6 +2239,9 @@ function submitComplaint() {
   if (!phone || !title || !content) {
     showToast('⚠️ 필수 항목을 모두 입력해주세요'); return;
   }
+  if (phone.length !== 4) {
+    showToast('⚠️ 연락처 뒷 4자리를 정확히 입력해주세요'); return;
+  }
   if (!unit) {
     showToast('⚠️ 동/호수를 입력해주세요'); return;
   }
@@ -2230,7 +2256,7 @@ function submitComplaint() {
     if (!type) { showToast('⚠️ 소음 유형을 선택해주세요'); return; }
   }
 
-  const phoneLast4 = phone.replace(/[^0-9]/g,'').slice(-4);
+  const phoneLast4 = phone; // 이미 4자리만 입력
   const id = 'UL-2025-' + String(complaintCounter).padStart(4,'0');
   const today = new Date().toISOString().slice(0,10);
 
@@ -2288,18 +2314,33 @@ function submitComplaint() {
     obj.category = document.getElementById('f-category').value;
   }
 
-  complaints.unshift(obj);
-  complaintCounter++;
-  saveToStorage();
-
-  // ─── 히트맵 즉시 갱신 ───
-  setTimeout(() => {
-    renderHeatmap('noise-canvas-home');
-    renderNoiseStats();
-    renderHeatmap('noise-canvas');
-    renderLiveComplaints();
-    renderHomeComplaints();
-  }, 100);
+  // 첨부 파일 base64 변환 후 저장
+  if (uploadedFiles.length > 0) {
+    const toBase64 = f => new Promise(res => {
+      const r = new FileReader();
+      r.onload = e => res({ name: f.name, type: f.type, data: e.target.result });
+      r.readAsDataURL(f);
+    });
+    Promise.all(uploadedFiles.map(toBase64)).then(images => {
+      obj.attachments = images;
+      complaints.unshift(obj);
+      complaintCounter++;
+      saveToStorage();
+      setTimeout(() => {
+        renderHeatmap('noise-canvas-home'); renderNoiseStats();
+        renderHeatmap('noise-canvas'); renderLiveComplaints(); renderHomeComplaints();
+      }, 100);
+    });
+  } else {
+    obj.attachments = [];
+    complaints.unshift(obj);
+    complaintCounter++;
+    saveToStorage();
+    setTimeout(() => {
+      renderHeatmap('noise-canvas-home'); renderNoiseStats();
+      renderHeatmap('noise-canvas'); renderLiveComplaints(); renderHomeComplaints();
+    }, 100);
+  }
 
   // show success modal
   document.getElementById('modal-detail-body').innerHTML = `
@@ -2607,21 +2648,18 @@ const likedNotices = new Set();
 function renderNoticeList() {
   const el = document.getElementById('notice-list');
   el.innerHTML = notices.map((n, i) => {
-    const isLiked = likedNotices.has(n.id);
     const commentCount = (noticeComments[n.id]||[]).length;
     return `
     <div style="border-bottom:1px solid var(--border);">
-      <div onclick="openNoticeDetail(${n.id})" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;transition:background 0.15s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='white'">
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;transition:background 0.15s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='white'">
         <!-- 번호/핀 -->
-        <div class="notice-num ${n.pinned?'pinned':''}" style="flex-shrink:0;">${n.pinned?'📌':i+1}</div>
+        <div class="notice-num ${n.pinned?'pinned':''}" style="flex-shrink:0;cursor:pointer;" onclick="openNoticeDetail(${n.id})">${n.pinned?'📌':i+1}</div>
         <!-- 콘텐츠 -->
-        <div style="flex:1;min-width:0;">
-          <!-- 제목 -->
+        <div style="flex:1;min-width:0;cursor:pointer;" onclick="openNoticeDetail(${n.id})">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:nowrap;">
             ${n.pinned?'<span class="badge" style="background:#fef3cd;color:#856404;font-size:10px;padding:2px 7px;flex-shrink:0;">중요</span>':''}
             <span style="font-size:14px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${n.title}</span>
           </div>
-          <!-- 메타 한 줄 -->
           <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-light);flex-wrap:nowrap;overflow:hidden;">
             <span style="flex-shrink:0;">${n.date}</span>
             <span style="flex-shrink:0;color:var(--text-muted);">${n.author}</span>
@@ -2630,11 +2668,17 @@ function renderNoticeList() {
           </div>
         </div>
         <!-- 썸네일 (모바일 숨김) -->
-        ${n.image?`<img src="${n.image}" class="hide-mobile" style="width:56px;height:42px;object-fit:cover;border-radius:6px;border:1px solid var(--border);flex-shrink:0;">` : ''}
+        ${n.image ? `<img src="${n.image}" class="hide-mobile" onclick="openNoticeDetail(${n.id})" onerror="this.style.display='none'" style="width:56px;height:42px;object-fit:cover;border-radius:6px;border:1px solid var(--border);flex-shrink:0;cursor:pointer;">` : ''}
+        <!-- 관리자 수정/삭제 버튼 -->
+        ${isAdminLoggedIn ? `
+        <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;">
+          <button onclick="event.stopPropagation();openNoticeEditForm(${n.id})" class="btn btn-outline btn-sm" style="font-size:10px;padding:3px 8px;">✏️ 수정</button>
+          <button onclick="event.stopPropagation();deleteNotice(${n.id})" class="btn btn-danger btn-sm" style="font-size:10px;padding:3px 8px;">🗑 삭제</button>
+        </div>` : ''}
         <!-- 좋아요 -->
         <button onclick="event.stopPropagation();toggleLike(${n.id})" id="like-btn-list-${n.id}"
-          style="display:flex;align-items:center;gap:4px;background:${isLiked?'#fff0f0':'var(--surface)'};border:1.5px solid ${isLiked?'#f87171':'var(--border)'};border-radius:20px;padding:5px 10px;cursor:pointer;font-size:12px;font-weight:600;color:${isLiked?'#ef4444':'var(--text-muted)'};transition:all 0.2s;font-family:'Noto Sans KR',sans-serif;flex-shrink:0;">
-          ${isLiked?'❤️':'🤍'}<span>${n.likes||0}</span>
+          style="display:flex;align-items:center;gap:4px;background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:5px 10px;cursor:pointer;font-size:12px;font-weight:600;color:var(--text-muted);transition:all 0.2s;font-family:'Noto Sans KR',sans-serif;flex-shrink:0;">
+          🤍<span>${n.likes||0}</span>
         </button>
       </div>
     </div>`;
@@ -2665,13 +2709,11 @@ function submitNotice() {
   const pinned = document.getElementById('n-pinned').value === '1';
   const imgEl = document.getElementById('n-image-thumb');
   const image = imgEl.src && imgEl.src !== window.location.href ? imgEl.src : null;
-  notices.unshift({ id: noticeCounter++, title, content, date: new Date().toISOString().slice(0,10), pinned, author: '관리사무소', image });
+  notices.unshift({ id: noticeCounter++, title, content, date: new Date().toISOString().slice(0,10), pinned, author: '관리사무소', image, likes: 0 });
   renderNoticeList();
   renderHomeNotices();
   closeModal('modal-notice-form');
-  document.getElementById('n-title').value = '';
-  document.getElementById('n-content').value = '';
-  clearNoticeImage();
+  resetNoticeForm();
   saveToStorage(); showToast('✅ 공지사항이 등록되었습니다');
 }
 
@@ -2871,6 +2913,22 @@ function openDetail(id) {
       <span class="detail-label" style="margin-bottom:8px;">상세 내용</span>
       <div style="background:var(--surface);border-radius:6px;padding:12px;font-size:13px;line-height:1.7;color:var(--text)">${c.content}</div>
     </div>
+    ${c.attachments && c.attachments.length > 0 ? `
+    <div class="detail-row" style="flex-direction:column;grid-template-columns:1fr;">
+      <span class="detail-label" style="margin-bottom:8px;">📎 첨부 사진 (${c.attachments.length}개)</span>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        ${c.attachments.map(f => f.type && f.type.startsWith('image/') ? `
+          <img src="${f.data}" alt="${f.name}"
+            style="width:100px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border);cursor:pointer;"
+            onclick="window.open(this.src,'_blank')">
+        ` : `
+          <a href="${f.data}" download="${f.name}"
+            style="display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--primary);text-decoration:none;">
+            📄 ${f.name}
+          </a>
+        `).join('')}
+      </div>
+    </div>` : ''}
     ${actionArea}`;
   // value 직접 설정 (template literal 내 따옴표 충돌 방지)
   var titleInput = document.getElementById('edit-title-' + c.id);
@@ -3030,7 +3088,6 @@ function openNoticeDetail(id) {
   renderNoticeList();
   renderHomeNotices();
 
-  const isLiked = likedNotices.has(id);
   document.getElementById('modal-detail-title').textContent = '📣 공지사항';
   document.getElementById('modal-detail-body').innerHTML = `
     <div>
@@ -3047,8 +3104,8 @@ function openNoticeDetail(id) {
           <span style="font-size:11px;font-weight:600;color:var(--primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;">🏢 ${n.author}</span>
           <span style="font-size:11px;color:var(--text-light);white-space:nowrap;">👁 ${n.views}</span>
         </div>
-        <button id="like-btn-${n.id}" onclick="toggleLike(${n.id})" style="display:flex;align-items:center;gap:4px;background:${isLiked?'#fff0f0':'var(--white)'};border:1.5px solid ${isLiked?'#f87171':'var(--border)'};border-radius:20px;padding:4px 10px;cursor:pointer;font-size:11px;font-weight:600;color:${isLiked?'#ef4444':'var(--text-muted)'};transition:all 0.2s;font-family:'Noto Sans KR',sans-serif;flex-shrink:0;">
-          ${isLiked?'❤️':'🤍'}<span id="like-count-${n.id}">${n.likes||0}</span>
+        <button id="like-btn-${n.id}" onclick="toggleLike(${n.id})" style="display:flex;align-items:center;gap:4px;background:var(--white);border:1.5px solid var(--border);border-radius:20px;padding:4px 10px;cursor:pointer;font-size:11px;font-weight:600;color:var(--text-muted);transition:all 0.2s;font-family:'Noto Sans KR',sans-serif;flex-shrink:0;">
+          🤍<span id="like-count-${n.id}">${n.likes||0}</span>
         </button>
       </div>
       ${n.image ? `<img src="${n.image}" style="width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:14px;">` : ''}
@@ -3140,35 +3197,105 @@ function submitComment(noticeId) {
 function toggleLike(id) {
   const n = notices.find(x=>x.id===id);
   if (!n) return;
-  if (likedNotices.has(id)) {
-    likedNotices.delete(id);
-    n.likes = Math.max(0, (n.likes||0) - 1);
-  } else {
-    likedNotices.add(id);
-    n.likes = (n.likes||0) + 1;
-  }
-  const isLiked = likedNotices.has(id);
+  // 누구나 누르면 +1 (취소 없음)
+  n.likes = (n.likes||0) + 1;
 
-  // 리스트 버튼 즉시 업데이트
+  // 리스트 버튼 즉시 업데이트 (하트 애니메이션)
   const listBtn = document.getElementById(`like-btn-list-${id}`);
   if (listBtn) {
-    listBtn.style.background = isLiked ? '#fff0f0' : 'var(--surface)';
-    listBtn.style.borderColor = isLiked ? '#f87171' : 'var(--border)';
-    listBtn.style.color = isLiked ? '#ef4444' : 'var(--text-muted)';
-    listBtn.innerHTML = `${isLiked?'❤️':'🤍'} <span>${n.likes}</span>`;
+    listBtn.innerHTML = `❤️ <span>${n.likes}</span>`;
+    listBtn.style.background = '#fff0f0';
+    listBtn.style.borderColor = '#f87171';
+    listBtn.style.color = '#ef4444';
+    listBtn.style.transform = 'scale(1.2)';
+    setTimeout(() => { if(listBtn) listBtn.style.transform = 'scale(1)'; }, 200);
   }
 
   // 상세 모달 버튼도 업데이트
   const modalBtn = document.getElementById(`like-btn-${id}`);
   if (modalBtn) {
-    modalBtn.style.background = isLiked ? '#fff0f0' : 'var(--white)';
-    modalBtn.style.borderColor = isLiked ? '#f87171' : 'var(--border)';
-    modalBtn.style.color = isLiked ? '#ef4444' : 'var(--text-muted)';
-    modalBtn.innerHTML = `${isLiked?'❤️':'🤍'} <span id="like-count-${id}">${n.likes}</span>`;
+    modalBtn.innerHTML = `❤️ <span id="like-count-${id}">${n.likes}</span>`;
+    modalBtn.style.background = '#fff0f0';
+    modalBtn.style.borderColor = '#f87171';
+    modalBtn.style.color = '#ef4444';
   }
+
+  saveToStorage();
+}
+
+function openNoticeEditForm(id) {
+  const n = notices.find(x=>x.id===id);
+  if (!n) return;
+  document.getElementById('n-title').value   = n.title;
+  document.getElementById('n-content').value = n.content;
+  document.getElementById('n-pinned').value  = n.pinned ? '1' : '0';
+  if (n.image && n.image.length > 10) {
+    document.getElementById('n-image-thumb').src = n.image;
+    document.getElementById('n-image-preview').style.display = 'block';
+  } else {
+    clearNoticeImage();
+  }
+  // 수정 모드 표시
+  document.querySelector('#modal-notice-form .modal-header h3').textContent = '📝 공지사항 수정';
+  const submitBtn = document.querySelector('#modal-notice-form .modal-body button.btn-primary');
+  if (submitBtn) {
+    submitBtn.textContent = '수정 저장';
+    submitBtn.onclick = () => saveNoticeEdit(id);
+  }
+  openModal('modal-notice-form');
+}
+
+function saveNoticeEdit(id) {
+  const n = notices.find(x=>x.id===id);
+  if (!n) return;
+  const title   = document.getElementById('n-title').value.trim();
+  const content = document.getElementById('n-content').value.trim();
+  if (!title || !content) { showToast('⚠️ 제목과 내용을 입력해주세요'); return; }
+  n.title   = title;
+  n.content = content;
+  n.pinned  = document.getElementById('n-pinned').value === '1';
+  const imgThumb = document.getElementById('n-image-thumb');
+  const imgSrc = imgThumb ? imgThumb.src : '';
+  // 이미지 미리보기가 실제로 보이는 경우에만 저장, 아니면 null
+  const imgPreviewVisible = document.getElementById('n-image-preview').style.display !== 'none';
+  n.image = (imgSrc && imgPreviewVisible && imgSrc !== window.location.href && !imgSrc.endsWith('/')) ? imgSrc : null;
+  renderNoticeList();
+  renderHomeNotices();
+  closeModal('modal-notice-form');
+  resetNoticeForm();
+  saveToStorage(); showToast('✅ 공지사항이 수정되었습니다');
+}
+
+function deleteNotice(id) {
+  const btn = document.querySelector(`[onclick="event.stopPropagation();deleteNotice(${id})"]`);
+  if (btn && !btn.dataset.confirm) {
+    btn.dataset.confirm = '1';
+    btn.textContent = '정말 삭제?';
+    setTimeout(() => { if(btn){ btn.dataset.confirm=''; btn.textContent='🗑 삭제'; } }, 3000);
+    return;
+  }
+  const idx = notices.findIndex(x=>x.id===id);
+  if (idx === -1) return;
+  notices.splice(idx, 1);
+  renderNoticeList();
+  renderHomeNotices();
+  saveToStorage(); showToast('🗑 공지사항이 삭제되었습니다');
+}
+
+function resetNoticeForm() {
+  document.querySelector('#modal-notice-form .modal-header h3').textContent = '📣 공지사항 등록';
+  const submitBtn = document.querySelector('#modal-notice-form .modal-body button.btn-primary');
+  if (submitBtn) {
+    submitBtn.textContent = '등록하기';
+    submitBtn.onclick = submitNotice;
+  }
+  document.getElementById('n-title').value   = '';
+  document.getElementById('n-content').value = '';
+  clearNoticeImage();
 }
 
 function openNoticeForm() {
+  resetNoticeForm();
   openModal('modal-notice-form');
 }
 
@@ -3748,12 +3875,33 @@ function renderAdminShortcuts() {
   '<div style="padding:8px 12px;font-size:11px;color:var(--text-muted);">※ 상위 4개가 홈화면 바로가기에 자동 표시됩니다</div>';
 }
 
+function switchScType(type) {
+  const isUrl = type === 'url';
+  document.getElementById('sc-tel-group').style.display = isUrl ? 'none' : '';
+  document.getElementById('sc-url-group').style.display = isUrl ? '' : 'none';
+  document.getElementById('sc-type-phone').style.border    = isUrl ? '2px solid transparent' : '2px solid #8a6a2a';
+  document.getElementById('sc-type-phone').style.background = isUrl ? 'var(--surface)' : '#fef7e8';
+  document.getElementById('sc-type-phone').style.color      = isUrl ? 'var(--text-muted)' : '#6b4c1e';
+  document.getElementById('sc-type-url').style.border    = isUrl ? '2px solid #8a6a2a' : '2px solid transparent';
+  document.getElementById('sc-type-url').style.background = isUrl ? '#fef7e8' : 'var(--surface)';
+  document.getElementById('sc-type-url').style.color      = isUrl ? '#6b4c1e' : 'var(--text-muted)';
+}
+
 function openShortcutForm(idx) {
   document.getElementById('sc-edit-idx').value = idx !== undefined ? idx : '';
   if (idx !== undefined) {
     const s = shortcuts[idx];
     document.getElementById('sc-name').value = s.name;
-    document.getElementById('sc-tel').value = s.tel;
+    // URL vs 전화번호 분기
+    if (s.isUrl) {
+      switchScType('url');
+      document.getElementById('sc-url').value = s.tel;
+      document.getElementById('sc-tel').value = '';
+    } else {
+      switchScType('phone');
+      document.getElementById('sc-tel').value = s.tel;
+      document.getElementById('sc-url').value = '';
+    }
     document.getElementById('sc-icon').value = s.icon;
     document.getElementById('sc-color').value = s.color;
     document.getElementById('sc-category').value = s.category || 'inquiry';
@@ -3766,8 +3914,10 @@ function openShortcutForm(idx) {
       b.style.color = active ? '#6b4c1e' : 'var(--text-muted)';
     });
   } else {
+    switchScType('phone');
     document.getElementById('sc-name').value = '';
     document.getElementById('sc-tel').value = '';
+    document.getElementById('sc-url').value = '';
     document.getElementById('sc-icon').value = '📞';
     document.getElementById('sc-color').value = 'blue';
     document.querySelectorAll('.sc-icon-chip').forEach((b,i) => b.classList.toggle('selected', i===0));
@@ -3798,12 +3948,25 @@ function deleteShortcut(idx) {
 
 function saveShortcut() {
   const name  = document.getElementById('sc-name').value.trim();
-  const tel   = document.getElementById('sc-tel').value.trim();
   const icon  = document.getElementById('sc-icon').value;
   const color = document.getElementById('sc-color').value;
-  if (!name || !tel) { showToast('⚠️ 이름과 번호를 입력해주세요'); return; }
-  const isUrl = tel.startsWith('http');
   const category = document.getElementById('sc-category').value || 'inquiry';
+
+  // URL 방식 or 전화번호 방식
+  const isUrlMode = document.getElementById('sc-url-group').style.display !== 'none';
+  let tel, isUrl;
+  if (isUrlMode) {
+    tel = document.getElementById('sc-url').value.trim();
+    isUrl = true;
+    if (!tel) { showToast('⚠️ URL 주소를 입력해주세요'); return; }
+    if (!tel.startsWith('http')) tel = 'https://' + tel;
+  } else {
+    tel = document.getElementById('sc-tel').value.trim();
+    isUrl = false;
+    if (!tel) { showToast('⚠️ 전화번호를 입력해주세요'); return; }
+  }
+  if (!name) { showToast('⚠️ 이름을 입력해주세요'); return; }
+
   const obj = { name, tel, icon, color, isUrl, category };
   const idx = document.getElementById('sc-edit-idx').value;
   if (idx !== '') shortcuts[parseInt(idx)] = obj;
@@ -4513,8 +4676,7 @@ window.addEventListener('resize', () => {
 // Initial home canvas render
 setTimeout(() => { updateHeatmapMonthUI(); renderHeatmap('noise-canvas-home'); renderNoiseStats(); }, 200);
 
-
-// 앱 시작 완료 - JSONBin에서 데이터 로드
+// 앱 시작 완료 - Google Sheets에서 데이터 로드
 console.log('✅ 앱 초기화 완료');
 setTimeout(loadFromStorage, 300);
 
