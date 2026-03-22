@@ -1954,20 +1954,23 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbyDZNdbX1VEx9JBn3ir0Hhm
 
 async function saveToStorage() {
   try {
-    const data = encodeURIComponent(JSON.stringify({
+    const body = JSON.stringify({
       complaints, notices, noticeComments, shortcuts,
       complaintCounter, noticeCounter, commentCounter
-    }));
-    const res = await fetch(GAS_URL + '?action=save&data=' + data);
-    const text = await res.text();
-    if (text === 'ok') console.log('✅ 저장 완료');
-    else console.warn('저장 실패:', text);
+    });
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: body
+    });
+    console.log('✅ 저장 완료');
   } catch(e) { console.warn('저장 오류:', e); }
 }
 
 async function loadFromStorage() {
   try {
-    const res = await fetch(GAS_URL);
+    const res = await fetch(GAS_URL + '?t=' + Date.now());
     if (!res.ok) return;
     const text = await res.text();
     if (!text || text === '{}') { console.log('저장된 데이터 없음'); return; }
