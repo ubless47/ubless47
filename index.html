@@ -1139,7 +1139,170 @@
 </head>
 <body>
 
-<!-- ─── HEADER ─── -->
+<!-- ─── SPLASH SCREEN ─── -->
+<div id="splash-screen" style="
+  position:fixed;inset:0;z-index:99999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#0a0600 0%,#1a1005 30%,#2c1f0e 60%,#0d0800 100%);
+  overflow:hidden;
+">
+  <!-- 배경 파티클 -->
+  <div id="splash-particles" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;"></div>
+
+  <!-- 중앙 콘텐츠 -->
+  <div style="position:relative;text-align:center;padding:0 24px;">
+
+    <!-- 로고 엠블렘 -->
+    <div id="splash-emblem" style="
+      width:80px;height:80px;margin:0 auto 28px;
+      background:linear-gradient(135deg,#c8a96e,#8a6a2a);
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      box-shadow:0 0 40px rgba(200,169,110,0.4),0 0 80px rgba(200,169,110,0.15);
+      opacity:0;transform:scale(0.6);
+      transition:opacity 0.8s ease,transform 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    ">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+        <path d="M22 4L6 14V30L22 40L38 30V14L22 4Z" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.9"/>
+        <path d="M22 10L10 18V26L22 34L34 26V18L22 10Z" fill="rgba(255,255,255,0.12)" stroke="#fff" stroke-width="1" opacity="0.7"/>
+        <circle cx="22" cy="22" r="4" fill="#fff" opacity="0.95"/>
+        <path d="M22 14V18M22 26V30M14 22H18M26 22H30" stroke="#fff" stroke-width="1.2" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- 타이틀 -->
+    <div id="splash-title" style="
+      opacity:0;transform:translateY(20px);
+      transition:opacity 0.7s ease 0.3s,transform 0.7s ease 0.3s;
+    ">
+      <div style="
+        font-family:'Noto Sans KR','Inter',sans-serif;
+        font-size:clamp(18px,4vw,26px);font-weight:700;
+        letter-spacing:6px;text-transform:uppercase;
+        background:linear-gradient(135deg,#f5e6b8 0%,#e8c97a 40%,#c8a055 70%,#f5e6b8 100%);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        margin-bottom:8px;
+      ">UBLESS LANDMARK 47</div>
+      <div style="
+        font-size:clamp(11px,2vw,13px);color:rgba(200,169,110,0.6);
+        letter-spacing:4px;font-family:'Noto Sans KR',sans-serif;
+        margin-bottom:32px;
+      ">유블레스 랜드마크47</div>
+    </div>
+
+    <!-- 환영 문구 -->
+    <div id="splash-welcome" style="
+      opacity:0;transform:translateY(16px);
+      transition:opacity 0.7s ease 0.6s,transform 0.7s ease 0.6s;
+    ">
+      <div style="
+        font-family:'Noto Serif KR',serif;
+        font-size:clamp(13px,3vw,17px);
+        color:rgba(255,255,255,0.85);
+        letter-spacing:1px;line-height:1.9;
+        margin-bottom:40px;
+      ">입주민 여러분, 환영합니다<br>
+        <span style="font-size:clamp(11px,2vw,13px);color:rgba(200,169,110,0.55);font-family:'Noto Sans KR',sans-serif;letter-spacing:0.5px;">편안하고 안전한 주거환경을 위해 함께합니다</span>
+      </div>
+    </div>
+
+    <!-- 로딩 바 -->
+    <div id="splash-bar-wrap" style="
+      opacity:0;transition:opacity 0.5s ease 0.9s;
+      width:min(280px,70vw);margin:0 auto;
+    ">
+      <div style="height:2px;background:rgba(200,169,110,0.2);border-radius:2px;overflow:hidden;">
+        <div id="splash-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#8a6a2a,#e8c97a,#c8a96e);border-radius:2px;transition:width 0.1s linear;"></div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:rgba(200,169,110,0.4);letter-spacing:1px;font-family:'Noto Sans KR',sans-serif;" id="splash-status">시스템 준비 중</div>
+    </div>
+
+  </div>
+
+  <!-- 하단 장식선 -->
+  <div style="
+    position:absolute;bottom:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,transparent,#c8a96e 30%,#e8c97a 50%,#c8a96e 70%,transparent);
+    opacity:0.6;
+  "></div>
+</div>
+
+<style>
+#splash-screen.fade-out {
+  opacity:0;
+  transition:opacity 0.7s ease;
+  pointer-events:none;
+}
+@keyframes floatUp {
+  0%   { opacity:0; transform:translateY(0); }
+  10%  { opacity:0.7; }
+  100% { opacity:0; transform:translateY(-120px); }
+}
+</style>
+
+<script>
+(function(){
+  // 파티클 생성
+  const container = document.getElementById('splash-particles');
+  for (let i = 0; i < 28; i++) {
+    const p = document.createElement('div');
+    const size = Math.random() * 3 + 1;
+    const left = Math.random() * 100;
+    const delay = Math.random() * 3;
+    const dur   = Math.random() * 4 + 3;
+    const top   = Math.random() * 100;
+    p.style.cssText = `
+      position:absolute;left:${left}%;top:${top}%;
+      width:${size}px;height:${size}px;border-radius:50%;
+      background:rgba(200,169,110,${Math.random()*0.4+0.1});
+      animation:floatUp ${dur}s ${delay}s infinite ease-in;
+    `;
+    container.appendChild(p);
+  }
+
+  // 요소 페이드인
+  setTimeout(() => {
+    document.getElementById('splash-emblem').style.opacity = '1';
+    document.getElementById('splash-emblem').style.transform = 'scale(1)';
+  }, 100);
+  setTimeout(() => {
+    document.getElementById('splash-title').style.opacity = '1';
+    document.getElementById('splash-title').style.transform = 'translateY(0)';
+  }, 300);
+  setTimeout(() => {
+    document.getElementById('splash-welcome').style.opacity = '1';
+    document.getElementById('splash-welcome').style.transform = 'translateY(0)';
+  }, 600);
+  setTimeout(() => {
+    document.getElementById('splash-bar-wrap').style.opacity = '1';
+  }, 900);
+
+  // 로딩 바 진행
+  const bar = document.getElementById('splash-bar');
+  const status = document.getElementById('splash-status');
+  const steps = [
+    {w:20, t:200,  msg:'데이터 불러오는 중'},
+    {w:50, t:600,  msg:'화면 구성 중'},
+    {w:80, t:1000, msg:'민원 현황 로딩'},
+    {w:95, t:1500, msg:'거의 완료'},
+    {w:100,t:1900, msg:'완료'},
+  ];
+  steps.forEach(s => {
+    setTimeout(() => {
+      bar.style.width = s.w + '%';
+      if (status) status.textContent = s.msg;
+    }, s.t);
+  });
+
+  // 2.4초 후 스플래시 사라짐
+  setTimeout(() => {
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.classList.add('fade-out');
+      setTimeout(() => { splash.style.display = 'none'; }, 750);
+    }
+  }, 2400);
+})();
+</script>
 <header>
   <div class="header-logo" onclick="showPage('home')" style="cursor:pointer">
     <div class="logo-emblem">
